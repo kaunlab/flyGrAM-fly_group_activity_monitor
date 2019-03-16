@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat May 16 19:45:33 2015
-
+    updated Fri March 15 16:30:00 2019 - JLC
 The MIT License (MIT)
 
 Copyright (C) 2015 Nicholas Mei <nicholas_mei@brown.edu>
@@ -74,14 +74,14 @@ def correct_distortion(input_frame, calib_mtx, calib_dist):
     return corrected_frame
 
 #%%
-def find_arduinos():
-    """
-    Function that scans serial ports to look for Arduinos
-    Returns a list containing 'COM' ports as strings
-    If an arduino is not found, return "None"
-    """    
-    ports = list(lp.comports())
-    return [port[0] for port in ports if "Arduino" in port[1]]
+#def find_arduinos():
+#   """
+#    Function that scans serial ports to look for Arduinos
+#    Returns a list containing 'COM' ports as strings
+#    If an arduino is not found, return "None"
+#    """    
+#    ports = list(lp.comports())
+#    return [port[0] for port in ports if "Arduino" in port[1]]
 
 #%%
 def control_expt(child_conn_obj, data_q_obj, use_arduino, expt_dur, led_freq, led_dur, 
@@ -120,15 +120,15 @@ def control_expt(child_conn_obj, data_q_obj, use_arduino, expt_dur, led_freq, le
         return time.clock()-start_time  
     
     if use_arduino:
-        arduino_ports = find_arduinos()
-        if arduino_ports:
-            port = arduino_ports[0]
-        else:
-            raise ValueError('Could not find an Arduino to connect to! Please check that an Arduino is connected!')
+#        arduino_ports = find_arduinos()
+#        if arduino_ports:
+#            port = arduino_ports[0]
+#        else:
+#            raise ValueError('Could not find an Arduino to connect to! Please check that an Arduino is connected!')
         #Initialize the arduino!
         #Doing it this way prevents the serial reset that occurs!
         arduino = serial.Serial()
-        arduino.port = port
+        arduino.port = 'COM4'
         arduino.baudrate = 250000
         arduino.timeout = 0.05
         arduino.setDTR(False)
